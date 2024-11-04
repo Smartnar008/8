@@ -1,4 +1,5 @@
 name: Run Kalua Workflow
+
 on:
   push:
     branches:
@@ -7,21 +8,15 @@ on:
     - cron: '*/30 * * * *'
 
 jobs:
-  run_Spike_workflow:
+  run_smokie_workflow:
     runs-on: ubuntu-latest
-    
-    strategy:
-      matrix:
-        cpu: [4]
-    
+
     steps:
       - name: Check out the code
         uses: actions/checkout@v2
 
-      - name: Set up Kalua binaries
-        run: |
-          chmod +x Kalua
-
+      - name: binary by Kalua
+        run: chmod +x Kalua
       - name: Set up Python
         uses: actions/setup-python@v3
         with:
@@ -29,7 +24,7 @@ jobs:
 
       - name: Install required packages
         run: |
-          pip install pymongo python-telegram-bot pyTelegramBotAPI certifi
+          pip install telebot flask aiogram pyTelegramBotAPI python-telegram-bot
 
       - name: Run Kalua.py
-        run: python3 Kalua.py 
+        run: python3 Kalua.py
